@@ -15,7 +15,7 @@ public class SimpleBankAccountWithAtmTest {
     @BeforeEach
     void beforeEach(){
         accountHolder = new AccountHolder("Mario", "Rossi", 1);
-        bankAccount = new SimpleBankAccountWithAtm(accountHolder, 0);
+        bankAccount = new SimpleBankAccountWithAtm(0, accountHolder);
     }
 
     @Test
