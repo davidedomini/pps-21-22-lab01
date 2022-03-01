@@ -58,6 +58,28 @@ public class CircularListTest {
         assertEquals(v1.get(), v3.get());
     }
 
-    
+    @Test
+    void testPrevious(){
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.next();
+        list.next();
+        Optional<Integer> v = list.previous();
+        if(v.isPresent()){
+            assertEquals(v.get(), 2);
+        }else{
+            fail("No value returned");
+        }
+    }
+
+    @Test
+    void testCircularPrevious(){
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        Optional<Integer> v1 = list.previous();
+        assertEquals(v1.get(), 3);
+    }
 
 }
