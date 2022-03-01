@@ -9,7 +9,7 @@ public class SimpleCircularList implements CircularList {
 
     @Override
     public void add(int element) {
-
+        list.add(element);
     }
 
     @Override
