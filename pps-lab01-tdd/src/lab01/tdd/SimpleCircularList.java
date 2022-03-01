@@ -5,7 +5,8 @@ import java.util.Optional;
 
 public class SimpleCircularList implements CircularList {
 
-    List<Integer> list = new ArrayList<>();
+    private final List<Integer> list = new ArrayList<>();
+    private int i = 0;
 
     @Override
     public void add(int element) {
@@ -24,7 +25,12 @@ public class SimpleCircularList implements CircularList {
 
     @Override
     public Optional<Integer> next() {
-        return Optional.empty();
+        if(i == list.size()){
+            i = 0;
+        }
+        Optional<Integer> v = Optional.of(list.get(i));
+        i = i + 1;
+        return v;
     }
 
     @Override
