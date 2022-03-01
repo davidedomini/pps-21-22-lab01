@@ -33,7 +33,7 @@ public class CircularListTest {
     void testAddInsertTheElement(){
         int oldSize = list.size();
         list.add(1);
-        assertEquals(list.size(), oldSize + 1);
+        assertEquals(oldSize + 1, list.size());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class CircularListTest {
         list.add(2);
         Optional<Integer> v = list.next();
         if(v.isPresent()){
-            assertEquals(v.get(), 1);
+            assertEquals(1, v.get());
         }else{
             fail("No value returned");
         }
@@ -67,7 +67,7 @@ public class CircularListTest {
         list.next();
         Optional<Integer> v = list.previous();
         if(v.isPresent()){
-            assertEquals(v.get(), 2);
+            assertEquals(2, v.get());
         }else{
             fail("No value returned");
         }
@@ -79,7 +79,21 @@ public class CircularListTest {
         list.add(2);
         list.add(3);
         Optional<Integer> v1 = list.previous();
-        assertEquals(v1.get(), 3);
+        assertEquals(3, v1.get());
+    }
+
+    @Test
+    void testReset(){
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.next();
+        list.next();
+        list.next();
+        list.previous();
+        list.reset();
+        Optional<Integer> v1 = list.next();
+        assertEquals(1, v1.get());
     }
 
 }

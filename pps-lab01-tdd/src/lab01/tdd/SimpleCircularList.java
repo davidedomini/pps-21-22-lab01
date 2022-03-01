@@ -10,12 +10,12 @@ public class SimpleCircularList implements CircularList {
 
     @Override
     public void add(int element) {
-        list.add(element);
+        this.list.add(element);
     }
 
     @Override
     public int size() {
-        return list.size();
+        return this.list.size();
     }
 
     @Override
@@ -25,27 +25,27 @@ public class SimpleCircularList implements CircularList {
 
     @Override
     public Optional<Integer> next() {
-        if(i == list.size()){
-            i = 0;
+        if(this.i == this.list.size()){
+            this.i = 0;
         }
-        Optional<Integer> v = Optional.of(list.get(i));
-        i = i + 1;
+        Optional<Integer> v = Optional.of(this.list.get(this.i));
+        this.i = this.i + 1;
         return v;
     }
 
     @Override
     public Optional<Integer> previous() {
-        if(i == 0){
-            i = list.size();
+        if(this.i == 0){
+            this.i = this.list.size();
         }
-        i = i - 1;
-        Optional<Integer> v = Optional.of(list.get(i));
+        this.i = this.i - 1;
+        Optional<Integer> v = Optional.of(this.list.get(this.i));
         return v;
     }
 
     @Override
     public void reset() {
-
+        this.i = 0;
     }
 
     @Override
