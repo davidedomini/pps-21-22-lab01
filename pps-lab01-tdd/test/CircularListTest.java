@@ -139,5 +139,38 @@ public class CircularListTest {
         }
     }
 
+    @Test
+    void testMultipleOfStrategy(){
+        list.add(1);
+        list.add(3);
+        list.add(3);
+        list.add(4);
+
+        int multiple = 2;
+
+        Optional<Integer> v =list.next((e)-> e % multiple == 0);
+        if(v.isPresent()){
+            assertEquals(4,v.get() );
+        }else{
+            fail("No value returned");
+        }
+    }
+
+    @Test
+    void testEqualsStrategy(){
+        list.add(1);
+        list.add(3);
+        list.add(5);
+        list.add(4);
+
+        int elementToFind = 5;
+
+        Optional<Integer> v =list.next((e)-> e == elementToFind);
+        if(v.isPresent()){
+            assertEquals(5,v.get() );
+        }else{
+            fail("No value returned");
+        }
+    }
 
 }
