@@ -1,5 +1,4 @@
-import lab01.tdd.CircularList;
-import lab01.tdd.SimpleCircularList;
+import lab01.tdd.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CircularListTest {
 
     CircularList list;
+    SelectStrategyFactory selectStrategyFactory;
 
     @BeforeEach
     void beforeEach() {
-        list = new SimpleCircularList();
+        this.list = new SimpleCircularList();
+        this.selectStrategyFactory = new SelectStrategyFactoryImpl();
     }
 
     @Test
@@ -102,7 +103,8 @@ public class CircularListTest {
         list.add(3);
         list.add(3);
         list.add(4);
-        Optional<Integer> v =list.next((e)-> e % 2 == 0);
+        SelectStrategy selectStrategy = this.selectStrategyFactory.createEvenStrategy();
+        Optional<Integer> v =list.next(selectStrategy);
         if(v.isPresent()){
             assertEquals(4,v.get() );
         }else{
@@ -116,7 +118,8 @@ public class CircularListTest {
         list.add(3);
         list.add(3);
         list.add(5);
-        Optional<Integer> v =list.next((e)-> e % 2 == 0);
+        SelectStrategy selectStrategy = this.selectStrategyFactory.createEvenStrategy();
+        Optional<Integer> v = list.next(selectStrategy);
         assertTrue(v.isEmpty());
     }
 
@@ -131,7 +134,9 @@ public class CircularListTest {
         list.next();
         list.next();
 
-        Optional<Integer> v =list.next((e)-> e % 2 == 0);
+        SelectStrategy selectStrategy = this.selectStrategyFactory.createEvenStrategy();
+        Optional<Integer> v = list.next(selectStrategy);
+
         if(v.isPresent()){
             assertEquals(2,v.get() );
         }else{
@@ -146,9 +151,9 @@ public class CircularListTest {
         list.add(3);
         list.add(4);
 
-        int multiple = 2;
+        SelectStrategy selectStrategy = this.selectStrategyFactory.createMultipleOfStrategy(2);
+        Optional<Integer> v =list.next(selectStrategy);
 
-        Optional<Integer> v =list.next((e)-> e % multiple == 0);
         if(v.isPresent()){
             assertEquals(4,v.get() );
         }else{
@@ -163,9 +168,9 @@ public class CircularListTest {
         list.add(5);
         list.add(4);
 
-        int elementToFind = 5;
+        SelectStrategy selectStrategy = this.selectStrategyFactory.createEqualsStrategy(5);
+        Optional<Integer> v =list.next(selectStrategy);
 
-        Optional<Integer> v =list.next((e)-> e == elementToFind);
         if(v.isPresent()){
             assertEquals(5,v.get() );
         }else{

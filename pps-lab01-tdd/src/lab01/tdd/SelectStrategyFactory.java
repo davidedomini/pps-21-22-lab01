@@ -1,7 +1,7 @@
 package lab01.tdd;
 
 public interface SelectStrategyFactory {
-    
+
     /**
      * Provides the implementation of a SelectStrategy to get the next even element
      * @return the next even element
