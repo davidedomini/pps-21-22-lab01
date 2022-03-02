@@ -50,6 +50,16 @@ public class SimpleCircularList implements CircularList {
 
     @Override
     public Optional<Integer> next(SelectStrategy strategy) {
+        int j = Math.max(i, 0);
+        int iterationToDo = 0;
+        do{
+            Optional<Integer> v = next();
+            if(v.isPresent() && strategy.apply(v.get())){
+                return v;
+            }
+            iterationToDo = iterationToDo + 1;
+            j = j == size() ? 0 : j + 1;
+        }while(iterationToDo < size());
         return Optional.empty();
     }
 }

@@ -96,4 +96,48 @@ public class CircularListTest {
         assertEquals(1, v1.get());
     }
 
+    @Test
+    void testEvenStrategy(){
+        list.add(1);
+        list.add(3);
+        list.add(3);
+        list.add(4);
+        Optional<Integer> v =list.next((e)-> e % 2 == 0);
+        if(v.isPresent()){
+            assertEquals(4,v.get() );
+        }else{
+            fail("No value returned");
+        }
+    }
+
+    @Test
+    void testEvenStrategyWithNoEvenValues(){
+        list.add(1);
+        list.add(3);
+        list.add(3);
+        list.add(5);
+        Optional<Integer> v =list.next((e)-> e % 2 == 0);
+        assertTrue(v.isEmpty());
+    }
+
+    @Test
+    void testNextWithStrategyCircularity(){
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(3);
+        list.add(5);
+
+        list.next();
+        list.next();
+
+        Optional<Integer> v =list.next((e)-> e % 2 == 0);
+        if(v.isPresent()){
+            assertEquals(2,v.get() );
+        }else{
+            fail("No value returned");
+        }
+    }
+
+
 }
