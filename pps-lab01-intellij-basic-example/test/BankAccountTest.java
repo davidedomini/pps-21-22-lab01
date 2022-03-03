@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class BankAccountTest {
+
     protected AccountHolder accountHolder;
     protected BankAccount bankAccount;
 

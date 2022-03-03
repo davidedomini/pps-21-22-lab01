@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CircularListTest {
 
-    CircularList list;
-    SelectStrategyFactory selectStrategyFactory;
+    private CircularList list;
+    private SelectStrategyFactory selectStrategyFactory;
 
     @BeforeEach
     void beforeEach() {
